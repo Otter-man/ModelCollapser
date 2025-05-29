@@ -3,6 +3,22 @@
 This script uses OpenAI's `gpt-image-1` model to perform iterative image edits: it takes a base image and a text prompt, generates a new image, then uses that output as the next input, repeating for _N_ iterations.  
 Usually it leads to model collapse.
 
+## What is Model Collapse?
+
+Model collapse is a phenomenon that occurs when an AI model is repeatedly asked to generate variations of its own outputs. Over multiple iterations, the model tends to:
+
+1. **Lose Diversity**: The model starts producing increasingly similar outputs, eventually converging to a limited set of patterns or styles.
+2. **Forget Original Features**: Details from the original image gradually fade away as the model focuses on the most prominent features.
+3. **Amplify Biases**: The model's inherent biases become more pronounced with each iteration.
+4. **Create Artifacts**: Strange patterns or distortions may emerge as the model struggles to maintain coherence.
+
+This tool demonstrates model collapse by:
+- Taking a base image and applying the same prompt repeatedly
+- Showing how the image evolves (or devolves) through multiple generations
+- Highlighting the limitations of current AI image generation models
+
+The results can be both fascinating and concerning, providing insights into the stability and reliability of AI image generation systems.
+
 ---
 
 ## 🚀 Features
@@ -13,6 +29,12 @@ Usually it leads to model collapse.
 - **Unique output folders**: each run creates a new UUID-named directory to avoid collisions.
 - **Gradio Web UI**: run as a web app for easy image uploads and prompt entry.
 - **Docker Support**: run the app in a containerized environment.
+
+## 📸 Screenshots
+
+![ModelCollapser Web Interface](docs/images/screenshot.png)
+
+*The Gradio web interface makes it easy to upload images and generate variations.*
 
 ---
 
