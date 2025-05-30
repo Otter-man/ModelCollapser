@@ -5,11 +5,11 @@ from PIL import Image
 
 def process_image_chain(image, prompt, n_iterations, n_retries):
     if image is None:
-        return None, None, "Please upload an image"
+        return None, None, None, "Please upload an image"
     if not prompt:
-        return None, None, "Please enter a prompt"
+        return None, None, None, "Please enter a prompt"
     if n_iterations < 1:
-        return None, None, "Number of iterations must be at least 1"
+        return None, None, None, "Number of iterations must be at least 1"
     
     try:
         # Save the uploaded image temporarily
@@ -23,7 +23,7 @@ def process_image_chain(image, prompt, n_iterations, n_retries):
         os.remove(temp_path)
         
         if not output_paths:
-            return None, None, "No images were generated"
+            return None, None, None, "No images were generated"
         
         # Create a GIF from the output images
         images = [Image.open(path) for path in output_paths]
@@ -36,11 +36,11 @@ def process_image_chain(image, prompt, n_iterations, n_retries):
             loop=0
         )
             
-        # Return the last generated image, the GIF, and a success message
-        return output_paths[-1], gif_path, f"Successfully generated {len(output_paths)} images"
+        # Return the last generated image, the GIF, all image paths, and a success message
+        return output_paths[-1], gif_path, output_paths, f"Successfully generated {len(output_paths)} images"
         
     except Exception as e:
-        return None, None, f"Error: {str(e)}"
+        return None, None, None, f"Error: {str(e)}"
 
 # Create the Gradio interface
 with gr.Blocks(title="Model Collapser") as demo:
@@ -60,10 +60,22 @@ with gr.Blocks(title="Model Collapser") as demo:
             gif_output = gr.Image(label="Generation Progress (GIF)")
             status = gr.Textbox(label="Status")
     
+    # Add a gallery component below the main interface
+    with gr.Row():
+        gallery = gr.Gallery(
+            label="All Generation Steps",
+            show_label=True,
+            elem_id="gallery",
+            columns=[4],
+            rows=[2],
+            height="auto",
+            object_fit="contain"
+        )
+    
     generate_btn.click(
         fn=process_image_chain,
         inputs=[input_image, prompt, n_iterations, n_retries],
-        outputs=[output_image, gif_output, status]
+        outputs=[output_image, gif_output, gallery, status]
     )
 
 if __name__ == "__main__":
