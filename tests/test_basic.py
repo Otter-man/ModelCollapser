@@ -13,9 +13,10 @@ class TestBasicFunctionality(unittest.TestCase):
 
     def test_main_files_exist(self):
         """Test that main project files exist"""
-        self.assertTrue(os.path.exists("main.py"), "main.py exists")
-        self.assertTrue(os.path.exists("app.py"), "app.py exists")
-        self.assertTrue(os.path.exists("requirements.txt"), "requirements.txt exists")
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.assertTrue(os.path.exists(os.path.join(base_dir, "main.py")), "main.py exists")
+        self.assertTrue(os.path.exists(os.path.join(base_dir, "app.py")), "app.py exists")
+        self.assertTrue(os.path.exists(os.path.join(base_dir, "requirements.txt")), "requirements.txt exists")
 
 if __name__ == '__main__':
     unittest.main() 
