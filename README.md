@@ -28,6 +28,10 @@ The results can be both fascinating and concerning, providing insights into the 
 - **Verbose output**: prints progress and file paths as it runs.
 - **Unique output folders**: each run creates a new UUID-named directory to avoid collisions.
 - **Gradio Web UI**: run as a web app for easy image uploads and prompt entry.
+- **Visualization Tools**:
+  - **Animated GIF**: automatically generates a GIF showing the progression of changes
+  - **Image Gallery**: view all intermediate steps in a scrollable grid layout
+  - **Final Result**: see the end result of the generation chain
 - **Docker Support**: run the app in a containerized environment.
 
 ## 📸 Screenshots
@@ -35,6 +39,10 @@ The results can be both fascinating and concerning, providing insights into the 
 ![ModelCollapser Web Interface](docs/images/screenshot.png)
 
 *The Gradio web interface makes it easy to upload images and generate variations.*
+
+![Generation Progress GIF](docs/images/sample_gif.gif)
+
+*Watch how the image evolves through multiple iterations in this animated GIF.*
 
 ---
 
@@ -91,6 +99,12 @@ python app.py
 - The app will be available at [http://localhost:7860](http://localhost:7860) by default.
 - To make it accessible on your network, it binds to `0.0.0.0:7860`.
 - Make sure your `OPENAI_API_KEY` is set in your environment.
+- Features include:
+  - Image upload and prompt entry
+  - Iteration and retry controls
+  - Animated GIF of the generation process
+  - Gallery view of all intermediate steps
+  - Final result display
 
 ### Docker
 
